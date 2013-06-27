@@ -1,0 +1,8 @@
+require 'drb/drb'
+
+URI = "druby://0.0.0.0:#{node[:drb][:port]}"
+# $SAFE = node[:drb][:safe] # disable eval() and friends
+DRb.start_service(URI)
+
+# Wait for the drb server thread to finish before exiting.
+DRb.thread.join
