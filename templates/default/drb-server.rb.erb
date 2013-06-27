@@ -1,6 +1,6 @@
 require 'drb/drb'
 
-URI = "druby://0.0.0.0:#{node[:drb][:port]}"
+URI = "druby://0.0.0.0:#{@drb_port}"
 # $SAFE = node[:drb][:safe] # disable eval() and friends
 DRb.start_service(URI)
 
