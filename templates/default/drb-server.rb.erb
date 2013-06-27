@@ -1,8 +1,17 @@
 require 'drb/drb'
 
-URI = "druby://0.0.0.0:<%= @drb_port.to_s %>"
+URI = "druby://0.0.0.0:<%= @drb_port %>"
+
+class TimeServer
+  def get_current_time
+    Time.now
+  end
+end
+
+SERVER = TimeServer.new
+
 # $SAFE = node[:drb][:safe] # disable eval() and friends
-DRb.start_service(URI)
+DRb.start_service(URI, SERVER)
 
 # Wait for the drb server thread to finish before exiting.
 DRb.thread.join

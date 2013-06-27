@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+package 'ruby'
+package 'telnet'
 
 template "/home/vagrant/drb-server.rb" do
   owner 'vagrant'
@@ -25,9 +27,6 @@ template "/home/vagrant/drb-server.rb" do
   variables({ :drb_port => node[:drb][:port] })
   action :create
 end
-
-package 'ruby'
-package 'telnet'
 
 service 'vulnerable DRB server' do
   action :start
