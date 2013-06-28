@@ -34,7 +34,7 @@ platforms.each do |platform, package_info|
       end
 
       it "creates a DRb script from the drb-server template" do
-        expect(chef_run).to create_file_with_content '/home/vagrant/drb-server.rb', %r|druby://0.0.0.0:#{node[:drb][:port]}|
+        expect(chef_run).to create_file_with_content '/home/vagrant/drb-server.rb', %r|druby://0.0.0.0:#{chef_run.node[:drb][:port]}|
         file = chef_run.template('/home/vagrant/drb-server.rb')
         expect(file).to be_owned_by('vagrant', 'vagrant')
       end
