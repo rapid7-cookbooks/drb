@@ -12,7 +12,6 @@ vagrant up
 
 ## Requirements
 ### Platform
-* Should work on any Unix-like system
 * CentOS (Tested on 6.3)
 
 ## Attributes
