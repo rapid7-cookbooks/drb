@@ -1,4 +1,4 @@
-# Drb [![Build Status](https://secure.travis-ci.org/rapid7-cookbooks/drb.png)](http://travis-ci.org/rapid7-cookbooks/drb)
+# Drb [![Build Status](https://secure.travis-ci.org/rapid7-cookbooks/drb.png)](http://travis-ci.org/rapid7-cookbooks/drb) [![Dependency Status](https://gemnasium.com/rapid7-cookbooks/drb.png)](https://gemnasium.com/rapid7-cookbooks/drb) 
 ## Description
 Installs Ruby, telnet (the default callback Metasploit attempts), and creates a simple (vulnerable) DRb Server.
 
