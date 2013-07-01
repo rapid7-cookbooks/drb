@@ -24,7 +24,7 @@ template "/home/vagrant/drb-server.rb" do
   owner 'vagrant'
   group 'vagrant'
   mode '0755'
-  variables({ :drb_port => node[:drb][:port] })
+  variables({ :drb_port => node[:drb][:port], :safe => node[:drb][:safe] })
   action :create
 end
 
