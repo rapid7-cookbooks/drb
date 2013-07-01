@@ -10,7 +10,12 @@ end
 
 SERVER = TimeServer.new
 
-# $SAFE = node[:drb][:safe] # disable eval() and friends
+# Disable eval() and friends?
+<% if @safe %>
+  $SAFE = <%= @safe %>
+<% else %>
+  # Set $SAFE to a value between 1 through 4 for a higher level of safety. $SAFE defaults to 0.
+<% end %>
 
 case ARGV.first
 when 'start'
