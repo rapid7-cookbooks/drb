@@ -11,7 +11,11 @@ end
 SERVER = TimeServer.new
 
 # $SAFE = node[:drb][:safe] # disable eval() and friends
-DRb.start_service(URI, SERVER)
 
-# Wait for the drb server thread to finish before exiting.
-DRb.thread.join
+case ARGV.first
+when 'start'
+  DRb.start_service(URI, SERVER)
+
+  # Wait for the drb server thread to finish before exiting.
+  DRb.thread.join
+end
