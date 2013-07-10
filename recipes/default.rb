@@ -30,6 +30,6 @@ end
 
 service 'vulnerable DRB server' do
   action :start
-  start_command "ruby /home/vagrant/drb-server.rb start"
+  start_command "ruby /home/vagrant/drb-server.rb start &"
   supports [:start]
 end
