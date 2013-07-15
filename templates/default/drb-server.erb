@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+# vi: set ft=ruby :
+# -*- mode: ruby -*-
+
+begin
+  require 'drb/drb'
+
+  URI = "druby://0.0.0.0:<%= @drb_port %>"
+
+  # NOTE: This came from the example code from Ruby docs
+  class TimeServer
+    def get_current_time
+      Time.now
+    end
+  end
+
+  SERVER = TimeServer.new
+
+  # Disable eval() and friends?
+  <% if @safe %>
+    $SAFE = <%= @safe %>
+  <% else %>
+    # Set $SAFE to a value between 1 through 4 for a higher level of safety. $SAFE defaults to 0.
+  <% end %>
+
+  case ARGV.first
+  when 'start'
+    $stdout.puts 'Starting drb-server'
+
+    # Fork the process
+    fork do
+      DRb.start_service(URI, SERVER)
+
+      # Wait for the drb server thread to finish before exiting.
+      DRb.thread.join
+    end
+  when 'status'
+    if (`ps aux | grep drb-server | grep -v grep`.chomp.split[1] rescue false)
+      $stdout.puts 'Running...'
+    else
+      $stdout.puts 'Not running...'
+    end
+  when 'stop'
+    $stdout.puts 'Stopping drb-server'
+    Process.kill('TERM', `ps aux | grep drb-server | grep -v grep`.chomp.split[1].to_i)
+  else
+    $stderr.puts "Unsupported argument '#{ARGV.first}' given"
+    exit 1
+  end
+rescue => e
+  $stderr.puts "Error: #{e.message}"
+  exit 1
+end
