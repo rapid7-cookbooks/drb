@@ -7,11 +7,11 @@ platforms = {
   },
   :debian => {
     :packages  => ['ruby', 'telnet'],
-    :versions => ['6.0.5']
+    :versions => ['6.4']
   },
   :ubuntu => {
     :packages  => ['ruby', 'telnet'],
-    :versions => ['6.0.5']
+    :versions => ['10.04', '12.04']
   },
 }
 
@@ -34,8 +34,8 @@ platforms.each do |platform, package_info|
       end
 
       it "creates a DRb script from the drb-server template" do
-        expect(chef_run).to create_file_with_content '/home/vagrant/drb-server.rb', %r|druby://0.0.0.0:#{chef_run.node[:drb][:port]}|
-        file = chef_run.template('/home/vagrant/drb-server.rb')
+        expect(chef_run).to create_file_with_content '/home/vagrant/drb-server', %r|druby://0.0.0.0:#{chef_run.node[:drb][:port]}|
+        file = chef_run.template('/home/vagrant/drb-server')
         expect(file).to be_owned_by('vagrant', 'vagrant')
       end
     end
